@@ -1,0 +1,144 @@
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+
+% you can add draft to documentclass to avoid recompiling tikz/pgfplots
+\usetikzlibrary{external} 
+\tikzexternalize[prefix=precompiled/]
+
+%\usetikzlibrary{external} \tikzset{external/system call={pdflatex
+     %\tikzexternalcheckshellescape -halt-on-error
+     %-interaction=batchmode -jobname "\image" "\texsource"}}
+ %\tikzexternalize[prefix=precompiled/]
+
+% CHANGE pdflatex command from 
+%		pdflatex.exe
+%		-synctex=-1 -interaction=nonstopmode "%pm"
+% to
+%		pdflatex.exe
+%   -synctex=-1 -interaction=nonstopmode -shell-escape "%pm"
+%
+% Source: http://tex.stackexchange.com/questions/170291/tikz-wont-let-me-externalize-and-halts-on-error
+%\colorlet{mycolor1}{blue!60!black}
+%\colorlet{mycolor2}{red!60!black}
+
+% matlab colors
+\definecolor{mycolor1}{rgb}{0, 0.4470, 0.7410} % 0, 114, 189
+\definecolor{mycolor2}{rgb}{0.8500, 0.3250, 0.0980}
+\definecolor{mycolor3}{rgb}{0.9290, 0.6940, 0.1250}
+\definecolor{mycolor4}{rgb}{0.4940, 0.1840, 0.5560}
+\definecolor{mycolor5}{rgb}{0.4660, 0.6740, 0.1880}
+\definecolor{mycolor6}{rgb}{0.3010, 0.7450, 0.9330}
+\definecolor{mycolor7}{rgb}{0.6350, 0.0780, 0.1840}
+
+\colorlet{mycolor1Light}{mycolor1!15}
+\colorlet{mycolor2Light}{mycolor2!15}
+
+% include FSMs
+\usetikzlibrary{arrows, automata, bending, calc, fit, positioning, shapes, backgrounds}
+
+% include dsp
+\makeatletter
+\input{tikz_pkgs/dsp/tikzlibrarydsp.code.tex}
+\makeatother
+
+\usetikzlibrary{chains}
+
+%globally plotting settings
+\pgfplotsset{/pgf/number format/use comma}
+
+\tikzset{%
+	% move x and y axis label
+	every x tick label/.style={yshift=-0.4em},
+	every y tick label/.style={xshift=-0.1em}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for flowcharts
+% see http://www.texample.net/tikz/examples/simple-flow-chart/
+
+% Define block styles
+\tikzstyle{flowdecision} = [diamond, draw, 
+    text width=6em, text badly centered, inner sep=0pt, aspect=2]
+\tikzstyle{flowblock} = [rectangle, draw, 
+    text width=8em, text centered, rounded corners,
+		]
+\tikzstyle{flowline} = [draw, -latex']
+\tikzstyle{flowconn} = [draw]
+\tikzstyle{flowcloud} = [draw, ellipse,
+	node distance=3cm,
+    minimum height=2em]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% align two tikz picture side by side
+% syntax: 
+%	\twotikzPictures{<figure location specifier>}
+%		{<figure1>}{<caption1>}{<label1>}
+%		{<figure2>}{<caption2>}{<label2>}{<caption>}{<label>}
+\newcommand{\twotikzPictures}[9]{
+  \begin{figure}[#1]
+    \begin{minipage}[t]{.5\linewidth}
+      \centering #2%
+    \end{minipage}%
+    \begin{minipage}[t]{.5\linewidth}
+      \centering #5%
+    \end{minipage}
+    \begin{minipage}[t]{.5\linewidth}
+      \subcaption{#3}
+      \label{#4}
+    \end{minipage}%
+    \begin{minipage}[t]{.5\linewidth}
+      \subcaption{#6}
+      \label{#7}
+    \end{minipage}
+		\caption{#8}
+		\label{#9}
+  \end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use this size for matlab2tikz
+
+\newcommand{\tikzpictureheightONETIKZPICTURE}{4.2cm}
+
+\newcommand{\tikzpicturewidthTWOTIKZPICTURES}{0.7\linewidth}
+\newcommand{\tikzpictureheightTWOTIKZPICTURES}{\tikzpictureheightONETIKZPICTURE}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% little helper macro for tikzpictures
+
+\newcommand{\tikzaxislabel}[2]{$#1\textrm{ / }\si{#2}$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% style to highlight pgfplots
+% http://tex.stackexchange.com/questions/103302/pgfplots-highlighting-filling-an-area-in-a-data-file
+%
+% does not work with legends!
+\pgfkeys{%
+  /tikz/on layer/.code={
+    \pgfonlayer{#1}\begingroup
+    \aftergroup\endpgfonlayer
+    \aftergroup\endgroup
+  }
+}
+
+\pgfplotsset{
+    highlight/.code args={#1:#2}{
+        \fill [every highlight] ({axis cs:#1,0}|-{rel axis cs:0,0}) rectangle ({axis cs:#2,0}|-{rel axis cs:0,1});
+    },
+    /tikz/every highlight/.style={
+        on layer=\pgfkeysvalueof{/pgfplots/highlight layer},
+        mycolor1Light
+    },
+    /tikz/highlight style/.style={
+        /tikz/every highlight/.append style=#1
+    },
+    highlight layer/.initial=axis background
+}
+
+

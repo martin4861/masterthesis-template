@@ -1,0 +1,18 @@
+\begin{tikzpicture}[baseline=(current axis.south)]
+	\begin{axis}
+		[
+			ymin=0,
+			ymax=1.1,
+			xmin=-1,
+			xmax=16,
+			xlabel=$\symtime$,
+			ylabel=$w_\symtime$,
+			ytick = {0, 0.5, 1},
+			width = 7.5cm,
+			height = 5cm		
+		]				
+		\pgfplotsinvokeforeach{0,1,...,15}{
+			\draw [mycolor1] (axis cs:#1,0) -- plot[mark=*] (axis cs:#1,1);
+		}			
+	\end{axis}			
+\end{tikzpicture}

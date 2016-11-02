@@ -1,0 +1,194 @@
+\sloppy
+
+\usepackage[ngerman]{babel}  
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{exscale} % schoenere Integrale etc...
+\usepackage{latexsym}% mehr Symbole
+\usepackage{amssymb} % mehr Symbole
+\usepackage{enumerate} % enumerate besser
+\usepackage[namelimits,sumlimits,intlimits]{amsmath}  % Integrations- und Summengrenzen ueber und unter den Zeichen und nicht daneben
+%%\usepackage{units}
+\usepackage{url}
+\usepackage{epsfig}  % Bilder einbinden
+\usepackage{fancyhdr} % fuer die Kopfzeilen
+\usepackage{emptypage}
+%\usepackage{citesort}      % sortiertes Zitieren, [7-9,10] anstelle von z.B. [10,7,8,9]
+\usepackage[numbers,sort&compress]{natbib} % Alternative zu citesort
+\usepackage{amsfonts}
+\usepackage{lscape}
+% fuer psfrag
+\usepackage{graphicx}
+\usepackage{ae}
+
+\usepackage{color}
+\usepackage{pstool}
+
+\usepackage{bm} % fuer fette Math Symbole
+\usepackage{mathrsfs} % geschwungene mathe schriftzeichen
+
+\usepackage{fancyvrb}
+\fvset{obeytabs=true,frame=lines,labelposition=topline,
+        framerule=1pt,numbers=right,fontshape=tt,fontsize=\small}
+\usepackage{makeidx}
+\usepackage{booktabs}
+\usepackage{acronym}
+\usepackage{subcaption} % für subfigures
+
+
+\usepackage{thesis} % Änderungen des Stils
+
+
+%%%%%% EIGENE PACKAGES %%%%%%%%%%%%%%%%%%%%%
+
+%% suppress warning: multiple pdfs with page group included in a single page
+%\pdfsuppresswarningpagegroup=1
+
+%% convert eps to pdf (only if updated)
+\usepackage{epstopdf}
+\epstopdfsetup{outdir=./precompiled/, update}
+%\epstopdfsetup{update}
+
+
+%% tikz %%%%%%%
+\input{div/tikzsettings}
+
+%% hyperlinks %%%%%%%
+
+\usepackage[raiselinks=true,
+						bookmarks=true,
+						%bookmarksopenlevel=1,
+						%bookmarksopen=true,
+						%bookmarksnumbered=true,
+						hyperindex=true,
+						plainpages=false,
+						pdfpagelabels=true,
+						pdfborder={0 0 0.5},
+						colorlinks=false,
+						linkcolor=green,						
+						linkbordercolor={0 0.61 0.50},   
+						citebordercolor={0 0.61 0.50}]{hyperref} 
+
+%%
+
+\usepackage{siunitx}
+\sisetup{
+	locale = DE, 
+	per-mode = fraction,
+	range-phrase = {\text{~bis~}}
+}
+\DeclareSIUnit\gravityg{g}
+\DeclareSIUnit\pixel{px}
+
+%% 
+
+\graphicspath{{pics/}{pics/svg/}}
+
+%% space before and after equation environments
+%\makeatletter
+%\g@addto@macro\normalsize{%
+  %\setlength\abovedisplayskip{10pt}
+  %\setlength\belowdisplayskip{10pt}
+  %\setlength\abovedisplayshortskip{10pt}
+  %\setlength\belowdisplayshortskip{10pt}
+%}
+%\makeatother
+
+%% todo notes ---
+
+\usepackage[disable,
+	textwidth=2cm,
+	textsize=tiny]{todonotes}
+% add compatibility with tikzexternalize
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+%%%%%%%%%%%%%
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Laengeneinstellungen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\parindent0cm
+\setlength{\parskip}{1ex} % Leerraum zwischen 2 Absaetzen,
+                          % kann auch groesser oder elastisch gewaehlt
+                          % werden, es existieren keine verbindlichen
+                          % Einstellungen => ausprobieren!
+\textwidth15.5cm            % fest
+%\textheight23.5cm         % fest
+\textheight25.5cm         % fest
+%\oddsidemargin0.5cm       % fest
+%\evensidemargin0.0cm      % fest
+\oddsidemargin3.75cm       % fest
+\evensidemargin3.25cm      % fest
+\topmargin-1.0cm           % fest
+% \setlength{\jot}{0.4cm} % Abstand in array-Umgebungen, bitte selbst
+                          % anpassen, es gibt keine Vorschriften
+
+% Offsets fuer Textzentrierung, bitte selbst ausprobieren,
+% da zwischen diesem File und dem Drucker einige solcher
+% Offsets liegen, die jeder anders haben kann.
+\hoffset-3.25cm
+%\hoffset0.0cm
+\voffset-0.25cm
+%\voffset-0.75cm
+
+\renewcommand{\baselinestretch}{1.1} % Zeilenabstand (max. 1.2 bei
+                                     % weniger Inhalt!) 1.1 ist
+                                     % Mindestwert, sonst kann man die
+                                     % Diss nicht mehr lesen.
+
+
+%-----------------------------------------------------------------------
+% Eigene Befehle
+%-----------------------------------------------------------------------
+\input{div/latexbefehle} % bindet persoenliche Makrofiles ein
+
+
+%-----------------------------------------------------------------------
+% Plazierung von float-Objekten (habe ich so uebernommen)
+%-----------------------------------------------------------------------
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{0.6}
+%------------------------------------------------------
+% Counters / Tiefe der Zaehlung fuer Inhaltsverzeichnis
+%------------------------------------------------------
+\setcounter{secnumdepth}{4} % max. bis 1.1.1.1 Ueberschriften
+\setcounter{tocdepth}{3}    % max. bis 1.1.1 ins Inhaltsverzeichnis uebernehmen
+
+%--------------------------------------------------
+% Einstellungen für Fancyheadings
+%--------------------------------------------------
+\pagestyle{fancyplain}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\rightmark}}
+\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\thepage}}
+\cfoot{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ \ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ \ #1}{}}
+\addtolength{\headheight}{4pt} % Korrektur fuer Fancyheadings, sonst viele Warnings!
+\setlength{\topsep}{0ex}       % so uebernommen
+\setlength{\itemsep}{0ex}      % so uebernommen
+\setlength{\parsep}{1pt plus 0.5pt minus 0.5pt} % so uebernommen
+\setlength{\partopsep}{2pt plus 1pt minus 1pt}  % so uebernommen
+
+
+
+%-----------------------------------------------------------------------
+% Index generieren fr makeindex
+%-----------------------------------------------------------------------
+\makeindex

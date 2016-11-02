@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Aenderungen gegenueber bk12.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\@normalsize{\@setsize\normalsize{14.5pt}\xivpt\@xivpt
+%geht offenbar nur, wenn bk12.sty direkt gaendert wird
+%bewirkt: \large auch in Bildunterschriften etc.
+%wenn noetig, promo.sty weglassen und statt book.sty, bk12.sty
+%geaenderte versionen mbook.sty und mk12.sty verwenden
+\def\chapter{\clearpage \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter}
+%
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
+ -.2ex}{2.3ex plus .2ex}{\LARGE\bf}} % <--- frueher \Large\bf
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
+ -.2ex}{1.5ex plus .2ex}{\Large\bf}} % <--- frueher \large\bf
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-1ex plus
+ -.2ex minus -.2ex}{.1ex}{\large\bf}} % <--- frueher \normalsize\bf, andere Abstaende
+\def\paragraph{\@startsection
+ {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+ {subparagraph}{4}{\parindent}{3.25ex plus 1ex minus
+ .2ex}{-1em}{\normalsize\bf}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Aenderungen gegenueber book.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\fnum@figure{{\bf \figurename{} \thefigure}} % \em}
+%Bildunterschrift, frueher: \def\fnum@figure{\figurename{} \thefigure}
+\def\fnum@table{{\bf \tablename{} \thetable}} % \em}
+% Tabellenueberschrift, frueher: \def\fnum@table{\tablename{} \thetable}

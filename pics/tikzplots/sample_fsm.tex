@@ -1,0 +1,50 @@
+\newcommand{\refex}[1]{(\ref{#1})}
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,
+                    semithick, 
+										every initial by arrow/.style={*->}, initial distance=1cm, initial text={}]
+  \tikzstyle{every state}=[fill=white,text=black,draw=black,rectangle, rounded corners]
+
+  \node[state] 								(STATE1) 			
+		{foo};		
+	
+  \node[initial left,state]  	(STATECENTER) 				[right=2.8cm of STATE1] 
+		{foo};		
+		
+	\node[state]         				(STATE2)						[right=2.8cm of STATECENTER] 
+		{foo};	
+		
+	\node[state]         				(STATE3)	[above=2.2cm of STATECENTER] 
+		{foo};	
+			
+	\node[state]         				(STATE4)					[below=2.2cm of STATECENTER] 
+		{foo};		
+		
+			
+	\path	
+			(STATECENTER) 		edge [bend right] node [above, align=center, pos=0.6] 
+				{foo}
+				(STATE1)
+			(STATE1) 				edge [bend right] node [below] {}			
+				(STATECENTER)
+					
+			(STATECENTER) 		edge [bend left] node [above, align=center, pos=0.6] 
+				{foo}
+				(STATE2)
+			(STATE2) 			edge [bend left] node [below] {}			
+				(STATECENTER)
+				
+			(STATECENTER) 					edge [bend right] node [right, align=center, pos=0.8] 
+				{foo} 
+				(STATE3)
+			(STATE3) 		edge [bend right] node [below] {}			
+					(STATECENTER)
+					
+			(STATECENTER) 		edge [bend left] node [right, align=center, pos=0.8] 
+				{foo}
+				(STATE4)
+			(STATE4) 		edge [bend left] node [below] {}			
+				(STATECENTER);
+					
+\end{tikzpicture}
+

@@ -1,0 +1,80 @@
+%% Abkürzungen
+
+% Vektor (damit das Aussehen leicht verändert werden kann)
+%\newcommand{\vek}[1]{\mathbf{#1}}
+
+\newcommand{\vek}[1]{\vec{#1}} % standard
+
+\newcommand{\vekex}[3]{\vec{#1}^{\,#2}_{#3}} % extended 
+\newcommand{\vekdot}[3]{\dot{\vec{#1}}^{\,#2}_{#3}} % extended for derivates
+\newcommand{\vekhat}[3]{\hat{\vec{#1}}^{\,#2}_{#3}} % extended for estimates
+
+% Matrix (damit das Aussehen leicht verändert werden kann)
+\newcommand{\mat}[1]{\mathbf{#1}} % standard
+\newcommand{\matex}[3]{\mat{#1}^{#2}_{#3}} % extended 
+\newcommand{\matdot}[3]{\dot{\mat{#1}}^{#2}_{#3}} % extended for derivates
+\newcommand{\mathat}[3]{\hat{\mat{#1}}^{\,#2}_{#3}} % extended for estimates
+
+% Normalverteilung
+\newcommand{\gauss}[1]{{\mathcal N} \left\{ #1 \right\} }
+%\newcommand{\gauss}[1]{{\mathfrak N} \left\{ #1 \right\} }
+
+% Erwartungswert
+\newcommand{\ex}[1]{E \left[ #1 \right]}
+
+% zwei Möglichkeiten
+\newcommand{\postwo}[2]{\left\{ \begin{matrix} #1 \\ #2 \end{matrix} \right.}
+
+% Ableitungen und Integrationen
+\newcommand{\di}{\text{d}}
+
+% Fouriertransformierte
+%\newcommand{\fourier}[1]{{\mathcal F} \left\{ #1 \right\} }
+\newcommand{\fourier}[1]{{\mathfrak F} \left\{ #1 \right\} }
+
+% Dirac Delta Funktion
+\newcommand{\dirac}[1]{\delta \left( #1 \right) }
+
+% Vektor oder Matrix transponierte
+\newcommand{\transposeT}{\textrm{T}} % only text
+\newcommand{\transpose}{^\transposeT} % full command
+
+\newcommand{\inversT}{-1} % only text
+\newcommand{\invers}{^{\inversT}} % full command
+
+% Kennzeichnung für Stichprobenmittelwert
+\newcommand{\mean}[1]{\overline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\engltext}[1]{(englisch \textit{#1})}
+\newcommand{\etal}{\textit{et al.}}
+
+% Strich über Text in Textmodus
+\makeatletter
+\newcommand*{\textoverline}[1]{$\overline{\hbox{#1}}\m@th$}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Abtastschritt für diskrete zeitsignale
+\newcommand{\symtime}{k}
+
+% diskreter Frequenzraum Abtastschritt
+\newcommand{\symfreq}{n}
+
+% Symbol für eine Pose
+\newcommand{\sympose}{P}
+\newcommand{\symdeltapose}{\Delta P}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Angabe einer Koordinate
+\newcommand{\coordXY}[2]{\textrm{X}=\SI{#1}{\meter}, \textrm{Y}=\SI{#2}{\meter}}
+\newcommand{\coordXYZ}[3]{\textrm{X}=\SI{#1}{\meter}, \textrm{Y}=\SI{#2}{\meter}, \textrm{Z}=\SI{#3}{\meter}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% matrix umgebungstyp
+\newenvironment{matrixenv}[0]{\begin{pmatrix}}{\end{pmatrix}}
+

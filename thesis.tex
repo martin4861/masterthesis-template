@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% thesis.tex
+% -----
+%
+% Haupt-File der Masterarbeit
+%
+% Erstellreihenfolge:
+%		* pdflatex: -synctex=-1 -interaction=nonstopmode -shell-escape "%pm"
+%			-> eps Fehler ignorieren
+%		* bibtex
+%		* 2x pdflatex
+%
+%
+%
+% -----
+% Speicher der LaTeX Konfiguration muss für tikzpictures erweitert werden
+% -> vlg. http://blog.analogmachine.org/2013/08/12/how-to-increase-miktex-2-9-memory/
+%
+% 1. initexmf --edit-config-file pdflatex 
+% 2. 
+%  pool_size=5000000
+%  main_memory=6000000
+%  extra_mem_bot=2000000
+%  font_mem_size=2000000
+% 3. initexmf --dump=pdflatex 
+%
+% 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[draft,noapp]{dipl}   % ohne appendix und ohne titel,formblatt,index,inhalt,lebenslauf...
+%\documentclass[draft]{dipl}         % ohne titel,formblatt,index,inhalt,lebenslauf...
+\documentclass{thesis}                % mit allem außer dem TODO Anhang (Final Version)
+
+% include style and other packages
+\input{div/includes}
+
+% korrekte worttrennungen
+\input{div/hyphenationlist}
+
+
+% doc settings
+
+\newcommand{\mytitle}{B. Sc.}
+\newcommand{\myname}{Dein Name}
+\newcommand{\thesistype}{Masterarbeit}
+
+\newcommand{\titlepagetitlelineA}{Zeile 1}
+\newcommand{\titlepagetitlelineB}{Zeile 2}
+\newcommand{\titlepagetitlelineC}{Zeile 3}
+
+\newcommand{\documenttitle}{\titlepagetitlelineA \titlepagetitlelineB \titlepagetitlelineC}
+
+\newcommand{\reviewer}{Prof. Dr.-Ing. Gert F. Trommer}
+\newcommand{\advisor}{Dipl.-Ing. Jan Ruppelt}
+
+\newcommand{\timestart}{XX. April 20XX}
+\newcommand{\timeend}{XX. Oktober 20XX}
+
+\hypersetup{
+	pdfauthor={\myname},
+	pdftitle={\documenttitle},
+	pdfkeywords={KEYWORDS}
+}
+
+% ----------------------------------------------------------------
+\begin{document}
+
+	\renewcommand{\bibname}{Literatur}
+	\renewcommand{\contentsname}{Inhalt}
+	\renewcommand{\figurename}{Abbildung}
+
+	\pagenumbering{Roman}
+	\setcounter{page}{1}
+
+	%\normalsize\large        % Umstellung auf grosse Schrift
+
+	%-----------------------------------------------------------------------
+	% INCLUDED FILES:
+	%-----------------------------------------------------------------------
+
+	\pagestyle{empty}
+
+	% Umschlagsseite
+	\tikzexternaldisable % ignore externalization because of eps figures in this file
+	\ifnotdraft{\include{div/titel}}
+	\tikzexternalenable % enable
+	\cleardoublepage
+
+	\include{div/erklaerung}
+	\cleardoublepage
+
+	% eigenes Vorwort
+	%\include{div/geleitwort}
+	%\cleardoublepage
+
+	% Inhaltsverzeichnis
+	\pagestyle{fancyplain}
+	
+	\begingroup
+		% Zeilenabstand inhaltsverzeichnis
+		\parskip=0pt
+			
+		\setcounter{tocdepth}{2}
+		\tableofcontents
+		\cleardoublepage	
+
+		% Abbildungsverzeichnis
+		\listoffigures
+		\cleardoublepage
+
+		% Tabellenverzeichnis
+		\listoftables
+		\cleardoublepage
+		
+
+		\listoftodos
+		\cleardoublepage
+	\endgroup
+
+
+	 %Symbolverzeichnis
+	\ifnotdraft{
+		\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{SYMBOLVERZEICHNIS}}
+		\rhead[\fancyplain{}{SYMBOLVERZEICHNIS}]{\fancyplain{}{\thepage}}
+		\input{div/symbolverzeichnis}
+		\clearpage
+		\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\rightmark}}
+		\rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\thepage}}
+		\cleardoublepage
+	}
+
+	\pagenumbering{arabic}  %separate Zaehlung
+	\setcounter{page}{1}	
+	
+	% Kapitel 1 =============================================================
+	\thispagestyle{plain}
+	\chapter{Einleitung}	
+		\input{chapter/einleitung/motivation}
+		\input{chapter/einleitung/umfeld}
+		\input{chapter/einleitung/aufgabenstellung}
+		\input{chapter/einleitung/aufbau}
+	\cleardoublepage
+
+	% Kapitel 2 =============================================================
+	\thispagestyle{plain}
+	\chapter{Grundlagen}
+		\label{grundlagen}
+	\cleardoublepage
+			
+		
+	% Kapitel 3 =============================================================
+	\thispagestyle{plain}
+	%\addtocontents{toc}{\protect\newpage}	% force a new page in ToC
+	\chapter{Foo1}
+	\cleardoublepage		
+
+	
+	
+	% Kapitel 7 =============================================================
+	\thispagestyle{plain}
+	\chapter{Zusammenfassung und Ausblick}
+		\label{zusammenfassung_ausblick}
+		\input{chapter/zusammenfassung_ausblick/zusammenfassung}
+		\input{chapter/zusammenfassung_ausblick/ausblick}
+	\cleardoublepage	
+
+	%  Anhaenge
+	% \begin{appendix}
+		% \ifnoapp{
+			% \include{appendix/torso_params}
+		% }
+	% \end{appendix}
+	% \cleardoublepage
+	% Korrektur Kopfzeile
+	% \lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\rightmark}}
+	% \rhead[\fancyplain{}{\leftmark}]{\fancyplain{}{\thepage}}
+
+	% DIN 1505 Bibliographie
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+	\bibliographystyle{plaindin}
+	\bibliography{thesis}
+
+	% Achtung: Die Seitennummer für den Index erscheint im
+	% Inhaltsverzeichnis falsch
+	\ifnotdraft{
+		%\addcontentsline{toc}{chapter}{Index}
+		% Index, Stichwortverzeichnis
+		%\printindex
+	}
+
+
+\end{document}

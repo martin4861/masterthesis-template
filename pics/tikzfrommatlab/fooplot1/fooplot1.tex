@@ -1,0 +1,27 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.856\textwidth,
+height=5cm,
+at={(0\textwidth,0cm)},
+scale only axis,
+xmin=14.0000000,
+xmax=18.0000000,
+xlabel={\tikzaxislabel{\textrm{Zeit}}{\second}},
+xmajorgrids,
+ymin=-15.0000000,
+ymax=-7.0000000,
+ylabel={\tikzaxislabel{a^n_{ib,z}}{\meter\per\square\second}},
+ymajorgrids,
+axis background/.style={fill=white}
+]
+\addplot [color=mycolor1,solid,forget plot]
+  table[]{pics/tikzfrommatlab/fooplot1/fooplot1-1.tsv};
+\addplot [color=mycolor2,line width=2.0pt,mark size=4.0pt,only marks,mark=o,mark options={solid},forget plot]
+  table[]{pics/tikzfrommatlab/fooplot1/fooplot1-2.tsv};
+\addplot [color=mycolor3,solid,forget plot]
+  table[]{pics/tikzfrommatlab/fooplot1/fooplot1-3.tsv};
+\end{axis}
+\end{tikzpicture}%

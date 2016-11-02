@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+		
+		\matrix (m1) [row sep=5ex, column sep=5ex]
+		{				
+			\node[label] (in) {$\vekex{u}{}{\symtime}$}; &
+			\node[coordinate] (fork0) {}; & 
+			\node[dspsquare, text width=1cm] (b) {$\matex{B}{}{\symtime}$}; & 
+			\node[dspadder] (add0) {}; &
+			\node[dspsquare, text width=1cm] (delay) {$z\invers$}; & &
+			\node[dspnodefull] (fork1) {}; & 
+			\node[dspsquare, text width=1cm] (c) {$\matex{H}{}{\symtime}$}; & 
+			\node[dspadder] (add1) {}; &
+			\node[coordinate] (fork2) {}; & 
+			\node[label] (out) {$\tilde{\vek{y}}_\symtime$}; \\
+			&&&
+			\node[coordinate] (coord0) {}; &
+			\node[dspsquare, text width=1cm] (a) {$\matex{\Phi}{}{\symtime}$}; & &
+			\node[coordinate] (coord1) {}; &
+			&&&\\
+		};
+					
+		
+		% row 1
+		\draw[dspline] (in) -- (fork0);
+		\draw[dspconn] (fork0) -- (b);
+		\draw[dspconn] (b) -- (add0);		
+		\draw[dspconn] (add0) -- node[midway, above] {$\vekex{x}{}{\symtime+1}$} (delay);		
+		\draw[dspline] (delay) -- node[midway, above] {$\vekex{x}{}{\symtime}$} (fork1);
+		\draw[dspconn] (fork1) -- (c);	
+		\draw[dspconn] (c) -- (add1);	
+		\draw[dspline] (add1) -- (fork2);
+		\draw[dspconn] (fork2) -- (out);		
+		%end row 1
+		
+		%feedbackloop
+		\draw[dspline] (fork1) -- (coord1);
+		\draw[dspconn] (coord1) -- (a);
+		\draw[dspline] (a) -- (coord0);
+		\draw[dspconn] (coord0) -- (add0);
+		%end feedbackloop
+							
+\end{tikzpicture}
